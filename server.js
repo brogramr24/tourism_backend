@@ -295,6 +295,13 @@ const PORT = process.env.PORT || 3001;
 
 async function runSchema() {
     try {
+        const [tables] = await pool.query("SHOW TABLES");
+
+        if (tables.length > 0) {
+            console.log("ℹ️ Tables already exist. Skipping schema creation.");
+            return;
+        }
+
         const sql = fs.readFileSync('./schema.sql', 'utf8');
 
         const statements = sql
