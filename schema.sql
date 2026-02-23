@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Guides table (extended profile for guide users)
-CREATE TABLE guides (
+CREATE TABLE IF NOT EXISTS guides (
     guide_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT UNIQUE NOT NULL,
     bio TEXT,
