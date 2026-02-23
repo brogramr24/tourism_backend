@@ -303,15 +303,7 @@ async function runSchema() {
             .filter(stmt => stmt.length);
 
         for (const statement of statements) {
-            try {
-                await pool.query(statement);
-            } catch (err) {
-                if (err.message.includes("already exists")) {
-                    console.log("ℹ️ Table already exists, skipping...");
-                } else {
-                    throw err; // re-throw real errors
-                }
-            }
+            await pool.query(statement);
         }
 
         console.log("✅ Database schema executed successfully");
