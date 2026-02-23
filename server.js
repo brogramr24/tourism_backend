@@ -295,7 +295,16 @@ const PORT = process.env.PORT || 3001;
 async function runSchema() {
     try {
         const sql = fs.readFileSync('./schema.sql', 'utf8');
-        await pool.query(sql);
+
+        const statements = sql
+            .split(';')
+            .map(stmt => stmt.trim())
+            .filter(stmt => stmt.length);
+
+        for (const statement of statements) {
+            await pool.query(statement);
+        }
+
         console.log("✅ Database schema executed successfully");
     } catch (err) {
         console.error("❌ Error executing schema:", err.message);
