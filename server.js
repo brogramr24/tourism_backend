@@ -306,11 +306,15 @@ async function runSchema() {
             await pool.query(statement);
         }
 
+        const [tables] = await pool.query("SHOW TABLES");
+        console.log("Tables in DB:", tables);
+
         console.log("✅ Database schema executed successfully");
     } catch (err) {
         console.error("❌ Error executing schema:", err.message);
     }
 }
+
 app.listen(PORT, async () => {
     console.log(`🚀 Server running on port ${PORT}`);
     await runSchema();
