@@ -1,6 +1,3 @@
--- Create database
-CREATE DATABASE IF NOT EXISTS tourism_db;
-USE tourism_db;
 
 -- Users table (tourists, guides, admins)
 CREATE TABLE IF NOT EXISTS users (
